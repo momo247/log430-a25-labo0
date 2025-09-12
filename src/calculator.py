@@ -47,6 +47,7 @@ if __name__ == "__main__":
         val_y = input("Saisissez la valeur 2 : ")
         my_calculator.addition(int(val_x), int(val_y))
         print('V1 + V2 =', my_calculator.last_result)
+        print('Test pipeline')
         is_running = int(input("Voulez-vous faire une autre addition ? [1 = Oui | 2 = Non] : "))
 
     print("Au revoir :)")
