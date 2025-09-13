@@ -1,10 +1,10 @@
-name: example_CI
+name: Test CI/CD
 
 on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout dépot
@@ -25,3 +25,18 @@ jobs:
         working-directory: src
         run: |
           python -m pytest
+
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - name: Checkout dépot
+        uses: actions/checkout@v3
+
+      - name: Déployer en local
+        run: |
+          cd $GITHUB_WORKSPACE
+          echo "Test déploiement en cours"
+          
+          docker compose down || true
+          docker compose up -d --build
